@@ -1,0 +1,162 @@
+function task9!(r, Side1, Side2, Side3, Side4)
+    a = 0
+    b = 0
+    c = 0
+    while isborder(r, Side1) == 0
+        
+        if c % 2 == 0
+            putmarker!(r)
+        end
+        move!(r, Side1)
+        a += 1
+        c += 1        
+    end
+    if c % 2 == 0
+        putmarker!(r)
+    end
+    c += 1
+    b += 1
+    move!(r, Side2)
+    while (isborder(r, Side1) && isborder(r, Side2)) == 0 || (isborder(r, Side3) && isborder(r, Side2)) == 0
+        if isborder(r, Side1)
+            while isborder(r, Side3) == 0
+                a -= 1
+                c += 1
+                if c % 2 == 1
+                    putmarker!(r)
+                end
+                move!(r, Side3)        
+            end
+            if (isborder(r, Side3) && isborder(r, Side2)) == 1
+                break
+            end
+            if c % 2 == 0
+                putmarker!(r)
+            end
+            b += 1
+            c += 1
+            move!(r, Side2)
+        end
+        if isborder(r, Side3)
+            while isborder(r, Side1) == 0
+                a += 1
+                c += 1
+                if c % 2 == 1
+                    putmarker!(r)
+                end
+                move!(r, Side1)        
+            end
+            if c % 2 == 0
+                putmarker!(r)
+            end
+            if (isborder(r, Side1) && isborder(r, Side2)) == 1
+                break
+            end
+            b += 1
+            c += 1
+            move!(r, Side2)
+        end
+    end
+    print(a)
+    if (isborder(r, Side1) && isborder(r, Side2)) == 1
+        while a != 0
+            move!(r, Side3)
+            a -= 1
+        end
+        while b != 0
+            move!(r, Side4)
+            b -= 1
+        end
+    end
+    if (isborder(r, Side3) && isborder(r, Side2)) == 1
+        while a != 0
+            move!(r, Side1)
+            a += 1
+        end
+        while b != 0
+            move!(r, Side4)
+            b -= 1
+        end
+    end
+    a = 0
+    b = 0
+    c = 0
+
+    while isborder(r, Side3) == 0
+        
+        if c % 2 == 0
+            putmarker!(r)
+        end
+        move!(r, Side3)
+        a += 1
+        c += 1        
+    end
+    if c % 2 == 0
+        putmarker!(r)
+    end
+    c += 1
+    b += 1
+    move!(r, Side4)
+
+    while (isborder(r, Side1) && isborder(r, Side4)) == 0 || (isborder(r, Side3) && isborder(r, Side4)) == 0
+        if isborder(r, Side1)
+            while isborder(r, Side3) == 0
+                a += 1
+                c += 1
+                if c % 2 == 1
+                    putmarker!(r)
+                end
+                move!(r, Side3)        
+            end
+            if (isborder(r, Side3) && isborder(r, Side4)) == 1
+                break
+            end
+            if c % 2 == 0
+                putmarker!(r)
+            end
+            b += 1
+            c += 1
+            move!(r, Side4)
+        end
+        if isborder(r, Side3)
+            while isborder(r, Side1) == 0
+                a -= 1
+                c += 1
+                if c % 2 == 1
+                    putmarker!(r)
+                end
+                move!(r, Side1)        
+            end
+            if c % 2 == 0
+                putmarker!(r)
+            end
+            if (isborder(r, Side1) && isborder(r, Side4)) == 1
+                break
+            end
+            b += 1
+            c += 1
+            move!(r, Side4)
+        end
+    end
+    print(a)
+    if (isborder(r, Side1) && isborder(r, Side4)) == 1
+        while a != 0
+            move!(r, Side3)
+            a += 1
+        end
+        while b != 0
+            move!(r, Side2)
+            b -= 1
+        end
+    end
+    if (isborder(r, Side3) && isborder(r, Side4)) == 1
+        while a != 0
+            move!(r, Side1)
+            a -= 1
+        end
+        while b != 0
+            move!(r, Side2)
+            b -= 1
+        end
+    end
+end
