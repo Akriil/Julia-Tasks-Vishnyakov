@@ -1,0 +1,140 @@
+function movebysteps!(r, Side, Numbersteps)
+    while !isborder(r, Side)
+        Numbersteps += 1
+        move!(r, Side)
+    end 
+end
+function newramka!(r, Side1, Side2, Side3, Side4)
+    while !isborder(r, Side1)
+        move!(r, Side1)
+    end
+    while !isborder(r, Side2)
+        move!(r, Side2)
+    end
+    if !isborder(r, Side1)
+        while !isborder(r, Side1)
+            move!(r, Side1)
+        end
+    end
+    ramka!(r, Side1, Side2, Side3, Side4)
+end
+
+function moveuntilangle(r, Side1, Side2)
+    while isborder(r, Side1)
+        putmarker!(r)
+        move!(r, Side2)
+        putmarker!(r)
+    end
+    move!(r, Side1)
+end
+
+function markaround(r, Side1, Side2, Side3, Side4)
+    if isborder(r, Side1)
+        Side = Side1
+    end
+    if isborder(r, Side2)
+        Side = Side12
+    end
+    if isborder(r, Side3)
+        Side = Side3
+    end
+    if isborder(r, Side4)
+        Side = Side4
+    end
+
+end
+
+function task5!(r, Side1, Side2, Side3, Side4)
+    #newramka!(r, Side1, Side2, Side3, Side4)
+    c = 0
+    d = 0
+
+    while !isborder(r, Side1)
+        move!(r, Side1)
+        c += 1
+    end
+    while !isborder(r, Side2)
+        move!(r, Side2)
+        d += 1
+    end
+    if !isborder(r, Side1)
+        while !isborder(r, Side1)
+            move!(r, Side1)
+            c += 1
+        end
+    end
+    ramka!(r, Side1, Side2, Side3, Side4)
+
+
+    a = 0
+    b = 0
+    while !isborder(r, Side3)
+        move!(r, Side3)
+        a += 1
+    end
+    move!(r, Side4)
+    while true
+        if !isborder(r, Side3)
+            while !isborder(r, Side3)
+                b += 1
+                move!(r, Side3)
+            end
+            if b == a
+                b = 0
+                move!(r,Side4)
+            else
+                break
+            end
+        else
+            #movebysteps!(r, Side1, b)
+            while !isborder(r, Side1)
+                b += 1
+                move!(r, Side1)
+            end
+            if b == a
+                b = 0
+                move!(r,Side4)
+            else
+                break
+            end
+        end
+    end
+    if isborder(r, Side1)
+        moveuntilangle(r, Side1, Side2)
+        moveuntilangle(r, Side4, Side1)
+        moveuntilangle(r, Side3, Side4)
+        moveuntilangle(r, Side2, Side3)
+        putmarker!(r)
+    end
+    if isborder(r, Side3)
+        moveuntilangle(r, Side3, Side2)
+        moveuntilangle(r, Side4, Side3)
+        moveuntilangle(r, Side1, Side4)
+        moveuntilangle(r, Side2, Side1)
+        putmarker!(r)
+    end
+
+    
+    while !isborder(r, Side1)
+        move!(r, Side1)
+    end
+    while !isborder(r, Side2)
+        move!(r, Side2)
+    end
+    if !isborder(r, Side1)
+        while !isborder(r, Side1)
+            move!(r, Side1)
+        end
+    end
+
+    while d != 0
+        d = d - 1
+        move!(r, Side4)
+    end
+    while c != 0
+        c = c - 1
+        move!(r, Side3)
+    end
+    
+    print(c, d)
+end
