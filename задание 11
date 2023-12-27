@@ -1,3 +1,7 @@
+using HorizonSideRobots
+r = Robot(animate = true)
+
+
 function move_two_sides(robot, x, y)::nothing
     while y < 0
         move!(robot, Nord)
