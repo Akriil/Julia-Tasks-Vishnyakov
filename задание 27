@@ -1,1 +1,7 @@
-не решил
+function sumV(f,s,a)
+    if s > length(f)
+        return a
+    else
+        return sumV(f,s+1,a+f[s])
+    end
+end
